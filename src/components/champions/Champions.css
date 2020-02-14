@@ -1,6 +1,48 @@
+.champions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 50px auto;
+} 
 
-img {
+.champions > h1 {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    text-align: center;
+}
+
+/* CHAMPIONS LIST */
+.champions-list {
+    grid-column: 1/2;
+    grid-row: 2/-1;
+    padding-top: 30px;
+}
+
+.champions-list li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.champions-list img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    padding: 10px;
+}
+
+/* CHAMPION INFO */
+.champion-info {
+    grid-column: 2/-1;
+    grid-row: 2/-1;
+    padding-top: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.champion-info img {
+    width: 200px;
+    height: 400px;
+    border-radius: 10px;
 }

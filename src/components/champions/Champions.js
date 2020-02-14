@@ -8,6 +8,7 @@ class Champions extends Component {
         super();
 
         this.state = {
+            loading: false,
             champions: [],
             img: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/AurelionSol_0.jpg',
             info: ''
@@ -55,7 +56,8 @@ class Champions extends Component {
         //console.log(individuals);
 
         this.setState({
-            champions: individuals
+            champions: individuals,
+            loading: false
         });
     };
 
@@ -93,19 +95,20 @@ const ChampionsList = (props) => {
     const champions = props.champions;
     
     return (
-        <ul className="champions-list">
-            {champions.map((champion, index) => {
-                const img = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
-                return (
-                    
-                    <li key={index}>
-                        <img src={img} alt="champion"/>
-                        <span onClick={() => props.handleClick(champion.blurb, img)}>{champion.name}</span>
-                    </li>
-                );
-            })}
-        </ul>
-
+        <div className="champions-list">
+            <ul>
+                {champions.map((champion, index) => {
+                    const img = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
+                    return (
+                        
+                        <li key={index} onClick={() => props.handleClick(champion.blurb, img)}>
+                            <img src={img} alt="champion"/>
+                            <span>{champion.name}</span>
+                        </li>
+                    );
+                })}
+            </ul>
+        </div>
     );
 }
 
