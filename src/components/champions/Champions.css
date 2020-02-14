@@ -57,6 +57,12 @@
     margin-left: 400px;
 }
 
+.champion-info > h4 {
+    display: block;
+    margin: 5px auto;
+    padding: 0;
+}
+
 .champion-info > img {
     border-radius: 10px;
 }

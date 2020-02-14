@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 /* Import css */
 import './Champions.css';
@@ -10,8 +10,8 @@ class Champions extends Component {
         this.state = {
             loading: false,
             champions: [],
-            img: 'http://ddragon.leagueoflegends.com/cdn/img/champion/loading/AurelionSol_0.jpg',
-            info: ''
+            img: null,
+            info: null
         };
     }
 
@@ -45,6 +45,8 @@ class Champions extends Component {
     }
 
     getAllChampions = async () => {
+        this.setState({loading: true});
+
         const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
         const responseData = await response.json();
     
@@ -75,16 +77,25 @@ class Champions extends Component {
     }
     
     render(){
-        const { champions, img, info } = this.state;
+        const { champions, img, info, loading } = this.state;
 
         return(
             <div className="champions">
                 <h1>LOL CHAMPIONS</h1>
+                {loading &&
+                    <h1>Loading...</h1>
+                }
+
                 <ChampionsList champions={champions} handleClick={this.handleClick}/>
                 
                 <div className="champion-info">
-                    <img src={img} alt="champion"/>
-                    <p>{info}</p>
+                    <h4>Select a Champion</h4>
+                    {info && 
+                        <Fragment>
+                            <img src={img} alt="champion"/>
+                            <p>{info}</p>
+                        </Fragment>
+                    }
                 </div>
             </div>
         )
