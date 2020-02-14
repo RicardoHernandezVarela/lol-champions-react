@@ -1,6 +1,5 @@
 .champions {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 50px auto;
 } 
 
@@ -8,13 +7,24 @@
     grid-column: 1/-1;
     grid-row: 1/2;
     text-align: center;
+    background-color: #7986cb;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    width: 100%;
 }
 
 /* CHAMPIONS LIST */
 .champions-list {
     grid-column: 1/2;
     grid-row: 2/-1;
-    padding-top: 30px;
+    
+}
+
+.champions-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
 }
 
 .champions-list li {
@@ -23,6 +33,7 @@
     flex-direction: row;
     justify-content: left;
     align-items: center;
+    padding: 15px;
 }
 
 .champions-list img {
@@ -34,15 +45,107 @@
 
 /* CHAMPION INFO */
 .champion-info {
+    position: fixed;
     grid-column: 2/-1;
     grid-row: 2/-1;
-    padding-top: 30px;
     align-items: center;
     text-align: center;
+    margin-left: 400px;
 }
 
-.champion-info img {
-    width: 200px;
-    height: 400px;
+.champion-info > img {
     border-radius: 10px;
+}
+
+.champion-info > p {
+    display: block;
+    margin: 20px auto;
+    overflow: scroll;
+}
+
+@media(min-width:320px) {
+    .champions {
+        grid-template-columns: 150px 150px;
+    }
+
+    .champions-list {
+        padding-top: 10px;
+    }
+
+    .champions-list ul {
+        padding: 0 0 0 5px;
+    }
+
+    .champion-info {
+        padding-top: 70px;
+        margin-left: 150px;
+    }
+
+    .champion-info > img {
+        width: 150px;
+        height: 200px;
+    }
+
+    .champion-info > p {
+        width: 90%;
+        font-size: 0.9em;
+        line-height: 1.5em;
+    }
+}
+
+@media(min-width:768px) {
+    .champions {
+        grid-template-columns: 400px 300px;
+    }
+
+    .champions-list {
+        padding-top: 30px;
+    }
+
+    .champions-list ul {
+        padding: 0 0 0 15px;
+    }
+
+    .champion-info {
+        padding-top: 80px;
+        margin-left: 400px;
+    }
+
+    .champion-info > img {
+        width: 200px;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .champion-info > p {
+        width: 80%;
+        font-size: 1em;
+        line-height: 1.1em;
+    }
+}
+
+@media(min-width:1000px) {
+    .champions {
+        grid-template-columns: 500px 300px;
+    }
+
+    .champions-list {
+        padding-top: 5px;
+    }
+
+    .champion-info {
+        margin-left: 500px;
+    }
+
+    .champion-info > img {
+        width: 200px;
+        height: 400px;
+        border-radius: 10px;
+    }
+
+    .champion-info > p {
+        width: 80%;
+        font-size: 1.2em;
+        line-height: 1.5em;
+    }
 }
