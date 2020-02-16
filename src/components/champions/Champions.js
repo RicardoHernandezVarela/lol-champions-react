@@ -59,6 +59,8 @@ class Champions extends Component {
 
         this.setState({
             champions: individuals,
+            info: individuals[0].blurb,
+            img: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${individuals[0].id}_0.jpg`,
             loading: false
         });
     };
