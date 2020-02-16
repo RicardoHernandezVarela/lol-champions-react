@@ -11,7 +11,10 @@ class Champions extends Component {
             loading: false,
             champions: [],
             img: null,
-            info: null
+            info: null,
+            title: null,
+            id: null,
+            error: null
         };
     }
 
@@ -47,30 +50,45 @@ class Champions extends Component {
     getAllChampions = async () => {
         this.setState({loading: true});
 
-        const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
-        const responseData = await response.json();
-    
-        const champiosData = await responseData.data;
-    
-        const championsArr = await this.createChampionsArray(champiosData, Object.keys(champiosData));
-        
-        const individuals = await this.getIndividualInfo(championsArr);
-        //console.log(individuals);
+        try {
+            const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
 
-        this.setState({
-            champions: individuals,
-            info: individuals[0].blurb,
-            img: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${individuals[0].id}_0.jpg`,
-            loading: false
-        });
+            const responseData = await response.json();
+        
+            const championsData = responseData.data;
+        
+            const championsArr = this.createChampionsArray(championsData, Object.keys(championsData));
+            
+            const individuals = await this.getIndividualInfo(championsArr);
+            //console.log(individuals);
+    
+            this.setState({
+                champions: individuals,
+                info: individuals[0].lore,
+                img: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${individuals[0].id}_0.jpg`,
+                title: individuals[0].title.toUpperCase(),
+                id: individuals[0].id,
+                loading: false
+            });
+
+        } catch (error) {
+            console.log(error.message);
+
+            this.setState({
+                error: "Error fetching data",
+                loading: false
+            });
+        }
     };
 
-    handleClick = (info, img) => {
+    handleClick = (info, img, title, id) => {
         //console.log(info);
 
         this.setState({
             info: info,
-            img: img
+            img: img,
+            title: title.toUpperCase(),
+            id: id
         })
     }
 
@@ -79,42 +97,55 @@ class Champions extends Component {
     }
     
     render(){
-        const { champions, img, info, loading } = this.state;
+        const { champions, img, info, title, id, loading, error } = this.state;
 
-        return(
-            <div className="champions">
-                <h1>LOL CHAMPIONS</h1>
-                {loading &&
-                    <h1>Loading...</h1>
-                }
+        if (loading) {
+            return(
+                <h2>Loading...</h2>
+            )
+        }
 
-                <ChampionsList champions={champions} handleClick={this.handleClick}/>
-                
+        if (error) {
+            return(
+                <h2>{error}</h2>
+            )
+        }
+
+        return (
+            <Fragment>
+                <ChampionsList 
+                    champions={champions} 
+                    handleClick={this.handleClick}
+                    id={id}
+                />
+
                 <div className="champion-info">
-                    <h4>Select a Champion</h4>
-                    {info && 
-                        <Fragment>
-                            <img src={img} alt="champion"/>
-                            <p>{info}</p>
-                        </Fragment>
-                    }
+                    <span>{title}</span>
+                    <img src={img} alt="champion"/>
+                    <p>{info}</p>
                 </div>
-            </div>
+            </Fragment>
         )
+
     }
 }
 
 const ChampionsList = (props) => {
     const champions = props.champions;
-    
+    const currentId = props.id;
+
     return (
         <div className="champions-list">
             <ul>
                 {champions.map((champion, index) => {
                     const img = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
+                    const { lore, title, id} = champion;
+
+                    const selected = id === currentId;
+
                     return (
                         
-                        <li key={index} onClick={() => props.handleClick(champion.blurb, img)}>
+                        <li className={selected ? "selected": null} key={index} onClick={() => props.handleClick(lore, img, title, id)}>
                             <img src={img} alt="champion"/>
                             <span>{champion.name}</span>
                         </li>

@@ -6,7 +6,10 @@ import Champions from './components/champions/Champions';
 
 function App() {
   return (
-    <Champions />
+    <div className="champions">
+      <h1>LOL CHAMPIONS</h1>
+      <Champions />
+    </div>
   );
 }
 
