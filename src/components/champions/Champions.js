@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react';
 
+/* Import components */
+import Loader from '../Loader/Loader';
+import Error from '../Error/Error';
+
 /* Import css */
 import './Champions.css';
 
@@ -101,13 +105,13 @@ class Champions extends Component {
 
         if (loading) {
             return(
-                <h2>Loading...</h2>
+                <Loader />
             )
         }
 
         if (error) {
             return(
-                <h2>{error}</h2>
+                <Error error={error}/>
             )
         }
 
