@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
 
 /* Import components */
+import ChampionsList from '../ChampionsList/ChampionsList';
+import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
 import Error from '../Error/Error';
-
-/* Import css */
-import './Champions.css';
 
 class Champions extends Component {
     constructor() {
@@ -123,41 +122,15 @@ class Champions extends Component {
                     id={id}
                 />
 
-                <div className="champion-info">
-                    <span>{title}</span>
-                    <img src={img} alt="champion"/>
-                    <p>{info}</p>
-                </div>
+                <Card 
+                    title={title}
+                    img={img}
+                    info={info}
+                />
             </Fragment>
         )
 
     }
-}
-
-const ChampionsList = (props) => {
-    const champions = props.champions;
-    const currentId = props.id;
-
-    return (
-        <div className="champions-list">
-            <ul>
-                {champions.map((champion, index) => {
-                    const img = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
-                    const { lore, title, id} = champion;
-
-                    const selected = id === currentId;
-
-                    return (
-                        
-                        <li className={selected ? "selected": null} key={index} onClick={() => props.handleClick(lore, img, title, id)}>
-                            <img src={img} alt="champion"/>
-                            <span>{champion.name}</span>
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
-    );
 }
 
 export default Champions;

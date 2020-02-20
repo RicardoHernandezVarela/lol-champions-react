@@ -11,3 +11,22 @@ body {
   display: grid;
   grid-template-rows: 50px auto;
 } 
+
+@media(min-width:320px) {
+  .champions {
+      grid-template-columns: 50% 50%;
+  }
+}
+
+@media(min-width:600px) {
+  .champions {
+      grid-template-columns: 55% 45%;
+  }
+}
+
+@media(min-width:900px) {
+  .champions {
+      grid-template-columns: 60% 40%;
+  }
+}
+

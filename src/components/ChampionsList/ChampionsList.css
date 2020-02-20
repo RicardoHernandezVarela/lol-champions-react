@@ -1,0 +1,88 @@
+/* CHAMPIONS LIST */
+.champions-list {
+    grid-column: 1/2;
+    grid-row: 2/-1;
+}
+
+.champions-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+.champions-list li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin: 5px 10px;
+    width: 150px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 4px 3px 0px rgba(0,0,0,0.2);
+}
+
+li.selected {
+    color: #f9f9f9;
+    background-color: #9fa8da;
+}
+
+.champions-list li > span {
+    display: block;
+    font-size: 0.87em;
+    padding-right: 5px;
+}
+
+.champions-list li:hover {
+    cursor: pointer;
+}
+
+.champions-list img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px 0 0 10px;
+    padding: 0 5px 0 0;
+}
+
+@media(min-width:320px) {
+    .champions-list {
+        padding-top: 5px;
+    }
+
+    .champions-list ul {
+        font-size: 0.8em;
+    }
+
+    .champions-list li {
+        width: 145px;
+    }
+}
+
+@media(min-width:600px) {
+    .champions-list {
+        padding-top: 10px;
+    }
+
+    .champions-list ul {
+        
+        font-size: 0.9em;
+    }
+
+    .champions-list li {
+        width: 140px;
+    }
+}
+
+@media(min-width:900px) {
+    .champions-list {
+        padding-top: 5px;
+    }
+
+    .champions-list li {
+        width: 150px;
+    }
+}
+
