@@ -11,7 +11,7 @@ const ChampionsList = (props) => {
         <div className="champions-list">
             <ul>
                 {champions.map((champion, index) => {
-                    const img = `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
+                    const img = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${champion.id}_0.jpg`;
                     const { lore, title, id} = champion;
 
                     const selected = id === currentId;

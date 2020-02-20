@@ -32,7 +32,7 @@ class Champions extends Component {
     getIndividualInfo =  (champions) => {
         const champs = champions.map(async (champion) => {
             try {
-                const response = await fetch(`http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion/${champion.id}.json`)
+                const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion/${champion.id}.json`)
                 const indChamp = await response.json();
                 const data = indChamp.data[champion.id]
 
@@ -54,7 +54,7 @@ class Champions extends Component {
         this.setState({loading: true});
 
         try {
-            const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
+            const response = await fetch('https://ddragon.leagueoflegends.com/cdn/10.3.1/data/en_US/champion.json');
 
             const responseData = await response.json();
         
@@ -68,7 +68,7 @@ class Champions extends Component {
             this.setState({
                 champions: individuals,
                 info: individuals[0].lore,
-                img: `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${individuals[0].id}_0.jpg`,
+                img: `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${individuals[0].id}_0.jpg`,
                 title: individuals[0].title.toUpperCase(),
                 id: individuals[0].id,
                 loading: false
